@@ -10,15 +10,21 @@ def ping(IP):
 	return wynik
 
 if __name__ == '__main__':
+"""
+otawrcie pliku w trybie dodawania
+"""
 	plik = open('ping.txt', 'a')
+"""
+dopisanie bierzącej daty
+"""
 	plik.write(time.strftime("%Y-%m-%d %H:%M")+'\n')
-	"""
+"""
   lista adresów do sprawdzenia
-  """
+"""
   lista = ['google.com']
-	""""
+""""
   pętla zapisująca do pliku 'ping.txt'
-  """
+"""
   for i in lista:
 		plik.write('Ping from '+i+' is {}'.format(ping(i))+'\n')
 	plik.write('##############################################################\n\n\n')
