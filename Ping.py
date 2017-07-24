@@ -1,13 +1,13 @@
 import os, re, time
 """
-sprawdzenie czy odpowiedź PING zwaraca 'Reply' i ustawienie wartości dla agrumentu 'wynik'
+sprawdzenie czy odpowiedź PING zwaraca 'Reply' i ustawienie wartości dla agrumentu 'result'
 """"
 def ping(IP):
-	if re.search('Reply',os.popen('ping -n 1 {}'.format('IP')).read()):
-		wynik = 'Available'
+	if re.search('Reply',os.popen('ping -n 1 {}'.format(IP)).read()) != None:
+		result = 'Available'
 	else:
-		wynik = 'Absent'
-	return wynik
+		result = 'Absent'
+	return result
 
 if __name__ == '__main__':
 """
