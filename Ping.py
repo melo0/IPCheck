@@ -1,7 +1,7 @@
 import os, re, time
 """
 sprawdzenie czy odpowiedź PING zwaraca 'Reply' i ustawienie wartości dla agrumentu 'result'
-""""
+"""
 def ping(IP):
 	if re.search('Reply',os.popen('ping -n 1 {}'.format(IP)).read()) != None:
 		result = 'Available'
