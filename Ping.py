@@ -21,7 +21,7 @@ dopisanie bierzącej daty
 """
   lista adresów do sprawdzenia
 """
-  lista = ['google.com']
+  lista = ['google.com','NieIstniejacyAdres.eu']
 """"
   pętla zapisująca do pliku 'ping.txt'
 """
