@@ -1,2 +1,2 @@
 # IPCheck
-script tahat check available of computers in the network
+script tahat check availability of computers/pages in the network
