@@ -1,8 +1,7 @@
 import os, re, time
-"""
-sprawdzenie czy odpowiedz PING zwaraca 'Reply' i ustawienie wartosci dla agrumentu 'result'
-Verify that the PING response returns 'Reply' and sets the value for the 'result' object.
-"""
+# Sprawdzenie czy odpowiedz PING zwaraca 'Reply' i ustawienie wartosci dla agrumentu 'result'
+# Verify that the PING returns 'Reply' and sets the value for the 'result' object.
+
 def ping(IP):
 	if re.search('Reply',os.popen('ping -n 1 {}'.format(IP)).read()) != None:
 		result = 'Available'
@@ -11,26 +10,31 @@ def ping(IP):
 	return result
 
 if __name__ == '__main__':
-	"""
-	otawrcie pliku w trybie dodawania
-	Opening file in append mode
-	"""
+	
+	# Otawrcie pliku w trybie dodawania	Opening file in append mode
+	
 	plik = open('ping.txt', 'a')
-	"""
-	dopisanie bierzacej daty
-	appending the current date 
-	"""
+	
+	# Otawrcie pliku z adresami	Opening file with addresses
+	
+	plik_lista = open('lista.txt', 'r')
+	
+	# Dopisanie bierzacej daty 	Appending the current date 
+	
 	plik.write(time.strftime("%Y-%m-%d %H:%M")+'\n')
-	"""
-	lista adresow do sprawdzenia
-	list of addresses to check
-	"""
+	
+	# Wypełnienie listy adresami z pliku "lista.txt"	Filling the list with addresses from file "lista.txt"
+	
+	lista = [x for x in (plik_lista.read().split('\n'))]
+	
+	# Lista adresow do sprawdzenia	list of addresses to check
+	
 	lista = ['google.com','NotExistingAddress.eu']
-	""""
-	petla zapisujaca do pliku 'ping.txt'
-	loop that writes to a file 'ping.txt'
-	"""
+	
+	# Petla zapisujaca do pliku 'ping.txt' 	Loop that writes to a file 'ping.txt'
+	
 	for i in lista:
 		plik.write('Ping from '+i+' is {}'.format(ping(i))+'\n')
 	plik.write('##############################################################\n\n\n')
 	plik.close()
+	plik_lista.close()
