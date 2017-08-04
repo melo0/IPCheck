@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	
 	# Dopisanie bierzacej daty 	Appending the current date 
 	
-	plik.write(time.strftime("%Y-%m-%d %H:%M")+'\n')
+	plik.write(time.strftime("%Y-%m-%d %H:%M:%S")+'\n')
 	
 	# Wypełnienie listy adresami z pliku "lista.txt"	Filling the list with addresses from file "lista.txt"
 	
@@ -29,12 +29,13 @@ if __name__ == '__main__':
 	
 	# Lista adresow do sprawdzenia	list of addresses to check
 	
-	lista = ['google.com','NotExistingAddress.eu']
+	# lista = ['google.com','NotExistingAddress.eu']
 	
 	# Petla zapisujaca do pliku 'ping.txt' 	Loop that writes to a file 'ping.txt'
 	
 	for i in lista:
 		plik.write('Ping from '+i+' is {}'.format(ping(i))+'\n')
+	plik.write(time.strftime("%Y-%m-%d %H:%M:%S")+'\n')
 	plik.write('##############################################################\n\n\n')
 	plik.close()
 	plik_lista.close()
