@@ -23,9 +23,9 @@ def przypisz():
 def ping(host):
     proce = subprocess.Popen("ping -n 1 " + host)
     if proce.wait():
-        return host + " - down \n"
+        return "Time: "+ time.strftime("%H:%M:%S")+" - " + host + " - DOWN!!!\n"
     else:
-        return host + "  - up \n"
+        return "Time: "+ time.strftime("%H:%M:%S")+" - " + host + "  - UP!!!\n"
 
 def for_workers(x):
     return ping(x)
@@ -33,12 +33,13 @@ def for_workers(x):
 def lista_wynikow(result):
     lista.insert(END, result)
     
+    
 
 def przetwarzanie(ad):
     pool=multiprocessing.Pool(processes = 16)
     for i in ad:
         pool.apply_async(for_workers, args = (i, ), callback = lista_wynikow)
-        #lista.insert(END, str(ping(i)))
+       
 
 
 def sprawdz():
@@ -53,15 +54,17 @@ def sprawdz():
 if __name__ == "__main__":
     okno = tkinter.Tk()
     okno.title("Program Ping")
-    okno.geometry("700x500")
+    okno.geometry("650x450")
     zrodlo = tkinter.Entry(okno)
     butt1 = tkinter.Button(okno, text = "  ...  ", command = lambda:przypisz())
     lista = tkinter.Text(okno)
+    
     butt2 = tkinter.Button(okno, text = "Sprawdź", command = lambda: sprawdz())
     butt3 = tkinter.Button(okno, text = "Koniec", command = lambda: koniec())
-    zrodlo.grid(row = 0,  stick = W+E)
-    butt1.grid(row = 0, column = 2)
+    zrodlo.grid(row = 0, column = 0, stick = W+E)
+    butt1.grid(row = 0, column = 0, stick = E)
+    
     lista.grid(row = 1,  stick = W)
-    butt2.grid(row = 2, stick = W)
+    butt2.grid(row = 2, stick = W+E)
     butt3.grid(row = 2, stick = E)
     okno.mainloop()
