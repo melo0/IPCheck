@@ -5,11 +5,9 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 import tkinter.ttk
-import os, re, time
+import time
 import multiprocessing
 import subprocess
-from tkinter.tix import Shell
-from email._header_value_parser import Terminal
 
 
 def koniec():
