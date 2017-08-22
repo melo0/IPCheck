@@ -10,12 +10,14 @@ import multiprocessing
 import subprocess
 
 
+
 def koniec():
     okno.quit()
     okno.destroy()
 
 
 def przypisz():
+    zrodlo.delete(0.0, END)
     zrodlo.insert(END, tkinter.filedialog.askopenfilename())
     return
 
@@ -44,6 +46,7 @@ def przetwarzanie(ad):
 
 def sprawdz():
     plik1 = open(zrodlo.get(), "r")
+    lista.delete(0.0, END)
     lista.insert(END, time.strftime("%Y-%m-%d %H:%M:%S")+'\n')
     adresy = [x for x in (plik1.read().split('\n'))]
     przetwarzanie(adresy)
