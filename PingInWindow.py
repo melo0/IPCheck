@@ -8,6 +8,7 @@ import tkinter.ttk
 import time
 import multiprocessing
 import subprocess
+from unittest import case
 
 
 
@@ -45,6 +46,8 @@ def przetwarzanie(ad):
        
 
 def sprawdz():
+    okno.geometry("670x440")
+    lista.grid(row = 1,  stick = W)
     if zrodlo.get() !='':
         plik1 = open(zrodlo.get(), "r")
         lista.delete(0.0, END)
@@ -56,25 +59,37 @@ def sprawdz():
         lista.delete(0.0, END)
         lista.insert(END, 'Wskaż źródło pliku')
     return
+
+
+def zapisz():
+    plik2 = tkinter.filedialog.asksaveasfile(mode='a')
+    if not plik2:
+        return
+    try:
+        plik2.write(lista.get(0.0, END))
+    finally:
+        plik2.close()   
     
 
 if __name__ == "__main__":
     okno = tkinter.Tk()
     okno.title("Program Ping")
-    okno.geometry("670x440")
+    okno.geometry("650x80")
     ramka = ttk.Frame(okno, padding = (10,10,10,10))
-    zrodlo = tkinter.Entry(ramka)
+    zrodlo = tkinter.Entry(ramka, width = 104)
+    wersja = tkinter.Label(ramka, text = "IpCheck ver. 0.5.4 ALPHA")
     lista = tkinter.Text(ramka)
     menubar = Menu(okno)
     filemenu = Menu(menubar, tearoff = 0)
     editmenu = Menu(menubar, tearoff = 0)
     filemenu.add_command(label = "Wczytaj plik", command = przypisz)
+    filemenu.add_command(label = "Zapisz wynik", command = zapisz)
     filemenu.add_command(label = "Zamknij", command = koniec)
     editmenu.add_command(label = "Sprawdź", command = sprawdz)
     menubar.add_cascade(label = "Plik", menu = filemenu)
     menubar.add_cascade(label = "Opcje", menu = editmenu)
     okno.config(menu = menubar)
     zrodlo.grid(row = 0, column = 0, stick = W+E)
-    lista.grid(row = 1,  stick = W)
-    ramka.pack()
+    wersja.grid(row = 2, stick = W+E)
+    ramka.pack(fill = BOTH)
     okno.mainloop()
