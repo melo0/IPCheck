@@ -45,12 +45,16 @@ def przetwarzanie(ad):
        
 
 def sprawdz():
-    plik1 = open(zrodlo.get(), "r")
-    lista.delete(0.0, END)
-    lista.insert(END, time.strftime("%Y-%m-%d %H:%M:%S")+'\n')
-    adresy = [x for x in (plik1.read().split('\n'))]
-    przetwarzanie(adresy)
-    plik1.close()
+    if zrodlo.get() !='':
+        plik1 = open(zrodlo.get(), "r")
+        lista.delete(0.0, END)
+        lista.insert(END, time.strftime("%Y-%m-%d %H:%M:%S")+'\n')
+        adresy = [x for x in (plik1.read().split('\n'))]
+        przetwarzanie(adresy)
+        plik1.close()
+    else:
+        lista.delete(0.0, END)
+        lista.insert(END, 'Wskaż źródło pliku')
     return
     
 
