@@ -17,7 +17,7 @@ def koniec():
 
 
 def przypisz():
-    zrodlo.delete(0.0, END)
+    zrodlo.delete(0, END)
     zrodlo.insert(END, tkinter.filedialog.askopenfilename())
     return
 
