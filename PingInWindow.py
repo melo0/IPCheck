@@ -8,7 +8,8 @@ import tkinter.ttk
 import time
 import multiprocessing
 import subprocess
-from unittest import case
+
+import matplotlib.pyplot as plt
 
 
 
@@ -71,13 +72,31 @@ def zapisz():
         plik2.close()   
     
 
+def wykres():
+    tablica = lista.get(0.0, END)
+    tak =  tablica.count("UP!!!")
+    nie = tablica.count("DOWN!!!")
+    if (tak>0 or nie>0):
+        wartosci = [tak,nie]
+        plt.pie(wartosci, labels = ('UP','Down'), colors = ('yellowgreen','lightcoral'), autopct='%1.1f%%', explode = (0.1, 0), shadow=True, startangle=140)
+        plt.axis('equal')
+        plt.show()
+    else:
+        okno.geometry("670x440")
+        lista.grid(row = 1, stick = W)
+        lista.delete(0.0, END)
+        lista.insert(END, 'Przeprowadź najpierw sprawdzanie')
+    return
+
+
+
 if __name__ == "__main__":
     okno = tkinter.Tk()
     okno.title("Program Ping")
     okno.geometry("650x80")
     ramka = ttk.Frame(okno, padding = (10,10,10,10))
     zrodlo = tkinter.Entry(ramka, width = 104)
-    wersja = tkinter.Label(ramka, text = "IpCheck ver. 0.5.4 ALPHA")
+    wersja = tkinter.Label(ramka, text = "IpCheck ver. 0.6.5 ALPHA")
     lista = tkinter.Text(ramka)
     menubar = Menu(okno)
     filemenu = Menu(menubar, tearoff = 0)
@@ -86,6 +105,7 @@ if __name__ == "__main__":
     filemenu.add_command(label = "Zapisz wynik", command = zapisz)
     filemenu.add_command(label = "Zamknij", command = koniec)
     editmenu.add_command(label = "Sprawdź", command = sprawdz)
+    editmenu.add_command(label = "Rysuj wykres", command = wykres)
     menubar.add_cascade(label = "Plik", menu = filemenu)
     menubar.add_cascade(label = "Opcje", menu = editmenu)
     okno.config(menu = menubar)
